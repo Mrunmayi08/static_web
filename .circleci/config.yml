@@ -38,8 +38,8 @@ jobs:
           name: Deploy
           command: |
               aws s3 sync ./ s3://my-hosted-conten --delete --exact-timestamps \
-              --exclude '.git/*' \
-              --exclude '.circleci/*';               
+              --exclude ".git/*" \
+              --exclude ".circleci/*";               
       # - run:
       #     name: s3 deploy
       #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
