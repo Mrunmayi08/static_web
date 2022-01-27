@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.3
+
+    working_directory: ~/static_web
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli --upgrade --user
+
+      - run:
+          name: s3 deploy
+          command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/static_web s3://my-hosted-conten --exclude ".git/*" --region us-east-1
