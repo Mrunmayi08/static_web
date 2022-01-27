@@ -30,14 +30,14 @@ jobs:
 #           name: s3 deploy
 #           command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/out s3://my-hosted-conten --exclude ".git/*" --region us-east-1
 
-# workflows:
-#   build_and_deploy:
-#     jobs:
-#       - build:
-#           filters:
-#             branches:
-#               only:
-#                 - main
+workflows:
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
 #       - deploy:
 #           requires:
 #             - build
