@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-              aws s3 sync temp s3://my-hosted-conten --delete --exact-timestamps ;               
+              aws s3 sync static_web/* s3://my-hosted-conten --delete --exact-timestamps ;               
       # - run:
       #     name: s3 deploy
       #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
