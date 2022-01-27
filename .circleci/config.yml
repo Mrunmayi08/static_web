@@ -20,7 +20,7 @@ jobs:
       - persist_to_workspace:
           root: out
           paths:
-            - "**"
+            - '*'
       # - run:
       #     name: s3 deploy
       #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1            
@@ -32,12 +32,12 @@ jobs:
        image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
-          at: out
+          at: .
       - checkout 
       - run:
           name: Deploy
           command: |
-              aws s3 sync out s3://my-hosted-conten --delete --exact-timestamps ;               
+              aws s3 sync ../static_web s3://my-hosted-conten --delete --exact-timestamps ;               
       - run:
           name: s3 deploy
           command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/out s3://my-hosted-conten --exclude ".git/*" --region us-east-1
