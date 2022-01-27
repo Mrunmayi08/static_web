@@ -13,7 +13,7 @@ jobs:
           name: Install AWS CLI
           command: pip install awscli --upgrade --user
       - persist_to_workspace:
-          root: out
+          root: ~/out
           paths:
             - "**"
       - run:
