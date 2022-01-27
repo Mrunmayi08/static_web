@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/python:3.6.3
 
-    working_directory: ~/static_web
+    # working_directory: ~/static_web
 
     steps:
       - checkout
@@ -15,10 +15,10 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - "**"
       - run:
           name: s3 deploy
-          command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/static_web s3://my-hosted-conten --exclude ".git/*" --region us-east-1            
+          command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1            
 
 
   deploy:
