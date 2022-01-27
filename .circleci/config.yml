@@ -1,17 +1,22 @@
 version: 2.1
 jobs:
   build:
-    docker:
-      - image: circleci/python:3.6.3
+    machine:
+       image: ubuntu-2004:202010-01
 
     # working_directory: ~/static_web
 
     steps:
       - checkout
-
       - run:
-          name: Install AWS CLI
-          command: pip install awscli --upgrade --user
+          name: Installing AWS CLI
+          command: |
+             sudo apt-get update
+             sudo apt install python3-pip
+             sudo pip3 install awsebcli --upgrade
+      # - run:
+      #     name: Install AWS CLI
+      #     command: pip install awscli --upgrade --user
       - persist_to_workspace:
           root: .
           paths:
@@ -23,8 +28,8 @@ jobs:
 
   deploy:
     # working_directory: ~/static_web
-    docker:
-      - image: circleci/python:3.6.3
+    machine:
+       image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
           at: .
@@ -32,7 +37,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-              aws s3 sync . s3://my-hosted-conten --delete --exact-timestamps;               
+              aws s3 sync ~/static_web s3://my-hosted-conten --delete --exact-timestamps;               
       # - run:
       #     name: s3 deploy
       #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
