@@ -30,7 +30,7 @@ jobs:
           at: .          
       - run:
           name: s3 deploy
-          command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
+          command: ~/.local/bin/ aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
 
 workflows:
   build_and_deploy:
