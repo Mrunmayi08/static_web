@@ -34,13 +34,13 @@ jobs:
       - attach_workspace:
           at: .
       - checkout 
-      # # - run:
-      #     name: Deploy
-      #     command: |
-      #         aws s3 sync ../static_web s3://my-hosted-conten --delete --exact-timestamps ;               
       - run:
-          name: s3 deploy
-          command: ~/.local/bin/aws s3 sync --delete --acl public-read out s3://my-hosted-conten --exclude ".git/*" --region us-east-1
+          name: Deploy
+          command: |
+              aws s3 sync out s3://my-hosted-conten --delete --exact-timestamps ;               
+      # - run:
+      #     name: s3 deploy
+      #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
 
 workflows:
   build_and_deploy:
