@@ -16,16 +16,18 @@ jobs:
           root: .
           paths:
             - "**"
-      - run:
-          name: s3 deploy
-          command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1            
+      # - run:
+      #     name: s3 deploy
+      #     command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1            
 
 
   deploy:
     # working_directory: ~/static_web
     docker:
       - image: circleci/python:3.6.3
-    steps:           
+    steps: 
+      - attach_workspace:
+          at: .          
       - run:
           name: s3 deploy
           command: ~/.local/bin/aws s3 sync --delete --acl public-read ~/. s3://my-hosted-conten --exclude ".git/*" --region us-east-1
@@ -38,10 +40,10 @@ workflows:
             branches:
               only:
                 - main
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only:
-      #           - main
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
